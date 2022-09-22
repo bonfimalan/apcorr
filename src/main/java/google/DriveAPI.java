@@ -24,7 +24,7 @@ public class DriveAPI {
         .build();
   }
 
-  public ByteArrayOutputStream downloadFile(String fileId) throws IOException {
+  public ByteArrayOutputStream downloadFile(String fileId) {
     try {
       OutputStream outputStream = new ByteArrayOutputStream();
 
@@ -32,8 +32,8 @@ public class DriveAPI {
         .executeMediaAndDownloadTo(outputStream);
       
       return (ByteArrayOutputStream) outputStream;
-    } catch(GoogleJsonResponseException e) {
-      System.err.println(e.getDetails());
+    } catch(IOException e) {
+      System.err.println(e.getMessage());
       return null;
     }
   }

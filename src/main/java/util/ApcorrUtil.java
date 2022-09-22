@@ -33,7 +33,8 @@ public class ApcorrUtil {
     // creates a file with the name of the course work
     File apcorDirectory = new File(GlobalVariables.APCORR_PATH);
     System.out.println(courseWorkDTO.getTitle());
-    rootDirectory = new File(apcorDirectory, courseWorkDTO.getTitle());
+    String title = Util.removeWinFileNameSpecialCarateres(courseWorkDTO.getTitle());
+    rootDirectory = new File(apcorDirectory, title);
     return rootDirectory.mkdir();
   }
 

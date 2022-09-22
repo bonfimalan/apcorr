@@ -22,7 +22,7 @@ public class ApcorrApplication {
     ClassroomAPI classAPI = new ClassroomAPI();
     List<Course> courses = null;
     Scanner scanner = new Scanner(System.in);
-    
+
     // requests the lit of courses
     courses = classAPI.getCourses();
 
@@ -51,17 +51,28 @@ public class ApcorrApplication {
     int courseWorkIndex = scanner.nextInt();
     String courseWorkId = courseWorks.get(courseWorkIndex).getId();
     String courseWorkTitle = courseWorks.get(courseWorkIndex).getTitle();
-
-    CourseWorkDTO courseWorkDTO = generateCourseWorkDTO(courseId, courseWorkId, courseWorkTitle, classAPI);
+     
+    CourseWorkDTO courseWorkDTO = generateCourseWorkDTO(courseId, courseWorkId,
+    courseWorkTitle, classAPI);
     ApcorrUtil util = new ApcorrUtil(courseWorkDTO);
     util.execute();
+
+    /*for (CourseWork courseWork : courseWorks) {
+      if (courseWork.getWorkType().equals("ASSIGNMENT") && courseWork.getMaxPoints() != null) {
+        CourseWorkDTO courseWorkDTO = generateCourseWorkDTO(courseId, courseWork.getId(), courseWork.getTitle(),
+            classAPI);
+        ApcorrUtil util = new ApcorrUtil(courseWorkDTO);
+        util.execute();
+      }
+    }*/
 
     // process the courseWorkDTO here
 
     scanner.close();
   }
 
-  public static CourseWorkDTO generateCourseWorkDTO(String courseId, String courseWorkId, String courseTitle, ClassroomAPI classAPI) {
+  public static CourseWorkDTO generateCourseWorkDTO(String courseId, String courseWorkId, String courseTitle,
+      ClassroomAPI classAPI) {
     CourseWorkDTO courseWorkDTO = new CourseWorkDTO(courseWorkId, courseId, courseTitle);
     List<StudentSubmission> studentSubmissions = classAPI.getStudentSubmissions(courseWorkDTO.getCourseId(),
         courseWorkDTO.getId());
@@ -99,7 +110,7 @@ public class ApcorrApplication {
   public static List<DriveFileDTO> generatDriveFileDTOs(List<Attachment> attachments) {
     List<DriveFileDTO> lFileDTOs = new ArrayList<>();
     DriveFile driveFileTempReference;
-  
+
     for (Attachment at : attachments) {
       driveFileTempReference = at.getDriveFile();
       lFileDTOs.add(new DriveFileDTO(driveFileTempReference.getId(), driveFileTempReference.getTitle()));
