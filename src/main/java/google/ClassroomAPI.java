@@ -8,6 +8,9 @@ import com.google.api.client.googleapis.javanet.GoogleNetHttpTransport;
 import com.google.api.client.http.javanet.NetHttpTransport;
 import com.google.api.services.classroom.Classroom;
 import com.google.api.services.classroom.model.Course;
+import com.google.api.services.classroom.model.CourseWork;
+import com.google.api.services.classroom.model.Student;
+import com.google.api.services.classroom.model.StudentSubmission;
 
 import global.GlobalVariables;
 
@@ -38,22 +41,48 @@ public class ClassroomAPI {
     return courses;
   }
 
-  public List<String> getCourseWorks(String courseId) {
+  public List<CourseWork> getCourseWorks(String courseId) {
     try {
-      service.courses().courseWork().list(courseId);
+      return service
+          .courses()
+          .courseWork()
+          .list(courseId)
+          .execute()
+          .getCourseWork();
     } catch (IOException e) {
       System.err.println(e.getMessage());
+      return null;
       // e.printStackTrace();
     }
-    
-    return null;
   }
 
-  public List<String> getClassWork() {
-    return null;
+  public List<StudentSubmission> getStudentSubmissions(String courseId, String courseWorkId) {
+    try {
+      return service
+          .courses()
+          .courseWork()
+          .studentSubmissions()
+          .list(courseId, courseWorkId)
+          .execute()
+          .getStudentSubmissions();
+    } catch (IOException e) {
+      System.err.println(e.getMessage());
+      return null;
+      // e.printStackTrace();
+    }
   }
 
-  public void getStudentInfo() {
-
+  public Student getStudentInfo(String courseId, String userId) {
+    try {
+      return service
+          .courses()
+          .students()
+          .get(courseId, userId)
+          .execute();
+    } catch (IOException e) {
+      System.err.println(e.getMessage());
+      return null;
+      //e.printStackTrace();
+    }
   }
 }

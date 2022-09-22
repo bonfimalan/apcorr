@@ -22,3 +22,7 @@ dependencies {
     implementation 'com.google.apis:google-api-services-classroom:v1-rev20220323-2.0.0'
     implementation 'com.google.apis:google-api-services-drive:v3-rev20220815-2.0.0'
 }
+
+run {
+    standardInput = System.in
+}

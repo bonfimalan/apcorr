@@ -30,3 +30,7 @@ build
 
 # Ignore Google tokens
 tokens
+
+# Ignore Google credentials
+src/main/resources/credentials.json
+bin/main/credentials.json

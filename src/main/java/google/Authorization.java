@@ -27,7 +27,7 @@ public class Authorization {
     ClassroomScopes.CLASSROOM_COURSEWORK_STUDENTS_READONLY,
     ClassroomScopes.CLASSROOM_STUDENT_SUBMISSIONS_STUDENTS_READONLY,
     ClassroomScopes.CLASSROOM_ROSTERS_READONLY,
-    DriveScopes.DRIVE_FILE
+    DriveScopes.DRIVE_READONLY
   );
 
   public static Credential getCredentials(final NetHttpTransport HTTP_TRANSPORT) throws IOException {
