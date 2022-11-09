@@ -15,10 +15,19 @@ import dto.StudentSubmitionDTO;
 import google.ClassroomAPI;
 import util.ApcorrUtil;
 
-public class ApcorrApplication {
+import javafx.application.Application;
+import javafx.stage.Stage;
+
+public class ApcorrApplication extends Application{
   // private static CourseWorkDTO courseWorkDTO;
 
+  public void start(Stage stagePrimario) throws Exception {
+    stagePrimario.show();
+  }
+
   public static void main(String[] args) throws Exception {
+    launch(args);
+    /*
     ClassroomAPI classAPI = new ClassroomAPI();
     List<Course> courses = null;
     Scanner scanner = new Scanner(System.in);
@@ -68,7 +77,8 @@ public class ApcorrApplication {
 
     // process the courseWorkDTO here
 
-    scanner.close();
+    //scanner.close();
+    
   }
 
   public static CourseWorkDTO generateCourseWorkDTO(String courseId, String courseWorkId, String courseTitle,
